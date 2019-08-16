@@ -1,0 +1,39 @@
+extends layout.pug
+
+block title
+    title Books
+
+block content
+    h1 Books
+    form(action="/books", method="post")
+        a.button.nav(href="/books/new") Create New Book
+        label.nav search
+            input(type="search" name="searchWord")
+            select.nav(name="column")
+                option(value="title") Title
+                option(value="author") Author
+                option(value="genre") Genre
+                option(value="year") Year
+        input.button.nav(type="submit" value="Search")
+    table
+        teath
+            tr
+                th Title
+                th Author
+                th Genre
+                th Year
+            
+            tbody
+
+            each book in books
+                tr
+                    td
+                        a(href= `/books/${book.id}`)= book.title
+                    td= book.author
+                    td= book.genre
+                    td= book.year
+
+    
+    div.pagination
+        -for(var i=1; i<=totalPages; i++)
+            a(href= `/books/?column=${column}&searchWord=${searchWord}&&page=${i}`)= i
