@@ -11,20 +11,19 @@ app.set("view engine", "pug");
 app.use("/static", express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//
 //Routes
-//
+
 
 app.get("/", (req, res) => {
   res.redirect("/books");
 });
 
-//search books from the search bar
+//search from the search bar
 app.post("/books", (req, res) => {
   res.redirect(`/books/?column=${req.body.column}&searchWord=${req.body.searchWord}&&page=1`);
 });
 
-//search books. First search without limit to get total number of pages. then search whith limit to render each page.
+// search books to get total number of pages.
 app.get("/books", (req, res) => {
   const column = req.query.column || "title";
   const searchWord = req.query.searchWord || "";
@@ -59,7 +58,7 @@ app.get("/books", (req, res) => {
   });
 });
 
-//get new book form
+// new book form
 app.get("/books/new", (req, res) => {
   const book = {
     title: "",
@@ -134,7 +133,7 @@ app.post("/books/:id", (req, res) => {
     });
 });
 
-//delete book
+//Delete Book
 app.post("/books/:id/delete", (req, res) => {
   Book.findByPk(req.params.id)
     .then(book => {
@@ -171,7 +170,7 @@ app.use((err, req, res, next) => {
 });
 
 //
-//database table creation, port selection and running message
+//table creation and port message
 //
 sequelize.sync().then(() => {
   app.listen(port, () => {
