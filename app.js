@@ -1,7 +1,7 @@
 const express = require("express");
 const sequelize = require("./models").sequelize;
 const Op = require("sequelize").Op;
-const bodyParser = require("body-parser");
+const bodyparser = require("body-parser");
 const app = express();
 const port = 3000;
 const Book = require("./models").Book;
@@ -9,36 +9,36 @@ const itemsPerPage = 5;
 
 app.set("view engine", "pug");
 app.use("/static", express.static("public"));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyparser.urlencoded({ extended: false }));
 
-//Routes
+ //Routes
 
-
-app.get("/", (req, res) => {
+// Home Route redirect to book route
+app.get("/", (req, res) => {   
   res.redirect("/books");
 });
 
 //search from the search bar
 app.post("/books", (req, res) => {
-  res.redirect(`/books/?column=${req.body.column}&searchWord=${req.body.searchWord}&&page=1`);
+  res.redirect(`/books/?column=${req.body.column}&searchKeyWord=${req.body.searchKeyWord}&&page=1`);
 });
 
 // search books to get total number of pages.
 app.get("/books", (req, res) => {
   const column = req.query.column || "title";
-  const searchWord = req.query.searchWord || "";
+  const searchKeyWord = req.query.searchKeyWord || "";
   const page = req.query.page || 1;
   Book.findAll({
     where: {
       [column]: {
-        [Op.like]: "%" + searchWord + "%"
+        [Op.like]: "%" + searchKeyWord + "%"
       }
     }
   }).then(totalBooks => {
     Book.findAll({
       where: {
         [column]: {
-          [Op.like]: "%" + searchWord + "%"
+          [Op.like]: "%" + searchKeyWord + "%"
         }
       },
       offset: page * itemsPerPage - itemsPerPage,
@@ -50,7 +50,7 @@ app.get("/books", (req, res) => {
           throw err;
         }
         const totalPages = Math.ceil(totalBooks.length / itemsPerPage);
-        res.render("index", { books, totalPages, column, searchWord });
+        res.render("index", { books, totalPages, column, searchKeyWord });
       })
       .catch(err => {
         res.render("error", { err });
@@ -58,7 +58,7 @@ app.get("/books", (req, res) => {
   });
 });
 
-// new book form
+//  show create new book form
 app.get("/books/new", (req, res) => {
   const book = {
     title: "",
@@ -69,7 +69,7 @@ app.get("/books/new", (req, res) => {
   res.render("new-book", {book});
 });
 
-//create new book
+//post new book to database
 app.post("/books/new", (req, res) => {
   Book.create(req.body)
     .then(() => {
@@ -87,7 +87,7 @@ app.post("/books/new", (req, res) => {
     });
 });
 
-//book details
+//show book detail form
 app.get("/books/:id", (req, res) => {
   Book.findByPk(req.params.id)
     .then(book => {
@@ -102,7 +102,7 @@ app.get("/books/:id", (req, res) => {
     });
 });
 
-//update book
+//update book info into database
 app.post("/books/:id", (req, res) => {
   Book.findByPk(req.params.id)
     .then(book => {
@@ -152,7 +152,7 @@ app.post("/books/:id/delete", (req, res) => {
     });
 });
 
-//page not found
+//404 page not found error
 app.use((req, res, next) => {
   let err = new Error("Page not found");
   err.status = 404;

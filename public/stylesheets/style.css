@@ -1,6 +1,8 @@
 body {
   padding: 10px 50px 50px;
   font: 18px "Garamond", serif;
+  background-image: url();
+  background-size: cover
 }
 
 a {
@@ -27,6 +29,18 @@ a.button, input[type=submit] {
 form a.button, input[type=submit] {
   margin-left: 140px;
   transition: 0.4s;
+}
+
+form a.button.nav, form input.button.nav {
+  margin-left: 0;
+}
+
+form label.nav {
+  margin-left: 170px;
+}
+
+form select.nav {
+  height: 38px;
 }
 
 input[type=submit] {
@@ -94,4 +108,10 @@ input[type=text] {
 
 .error {
   color: rgb(236, 15, 15);
+}
+
+.pagination {
+  margin-top: 50px;
+  margin-right: auto;
+  width: 200px;
 }

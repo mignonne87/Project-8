@@ -8,7 +8,7 @@ block content
     form(action="/books", method="post")
         a.button.nav(href="/books/new") Create New Book
         label.nav search
-            input(type="search" name="searchWord")
+            input(type="search" name="searchKeyWord")
             select.nav(name="column")
                 option(value="title") Title
                 option(value="author") Author
@@ -36,4 +36,4 @@ block content
     
     div.pagination
         -for(var i=1; i<=totalPages; i++)
-            a(href= `/books/?column=${column}&searchWord=${searchWord}&&page=${i}`)= i
+            a(href= `/books/?column=${column}&searchKeyWord=${searchKeyWord}&&page=${i}`)= i
