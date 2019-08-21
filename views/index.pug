@@ -36,4 +36,4 @@ block content
     
     div.pagination
         -for(var i=1; i<=totalPages; i++)
-            a(href= `/books/?column=${column}&searchKeyWord=${searchKeyWord}&&page=${i}`)= i
+            a.button(href= `/books/?column=${column}&searchKeyWord=${searchKeyWord}&&page=${i}`)= i

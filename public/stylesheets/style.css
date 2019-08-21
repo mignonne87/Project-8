@@ -1,12 +1,14 @@
 body {
   padding: 10px 50px 50px;
-  font: 18px "Garamond", serif;
-  background-image: url();
-  background-size: cover
+  font: 25px "Garamond", serif;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/White_library_tall_windows_%28Unsplash%29.jpg/800px-White_library_tall_windows_%28Unsplash%29.jpg");
+  background-size: cover;
+  margin: auto;
+  max-width: 800px
 }
 
 a {
-  color: #019875;
+  color: #bebed6;
   text-decoration: none;
   font-weight: bold;
   transition: 0.4s;
@@ -17,12 +19,12 @@ a {
   }
 
 a.button, input[type=submit] {
-  color: white;
-  background: #019875;
+  color: rgb(247, 241, 241);
+  background: #0e21c7;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 10px 14px 12px;
-  font-size: 14px;
-  border-radius: 2px;
+  padding: 15px 14px 20px;
+  font-size: 20px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -47,9 +49,9 @@ input[type=submit] {
   border: 0;
 }
 
-  a.button:hover, input[type=submit]:hover {
-    background-color: #01b189;
-  }
+a.button:hover, input[type=submit]:hover {
+  background-color: #e5f0ed;
+}
 
 p {
   margin: 20px auto;
@@ -74,15 +76,12 @@ th {
 }
 
 tr {
-  min-height: 50px;
-}
-
-tr:nth-child(2n) {
-  background: #E7E7E7;
+  background: rgba(29, 28, 28, 0.5)
 }
 
 td {
   padding: 5px 20px 5px 10px;
+  color: white;
 }
 
 label {
@@ -114,4 +113,8 @@ input[type=text] {
   margin-top: 50px;
   margin-right: auto;
   width: 200px;
+}
+.pagination a.button {
+  margin: 5px;
+  padding: 5px;
 }
