@@ -11,7 +11,7 @@ app.set("view engine", "pug");
 app.use("/static", express.static("public"));
 app.use(bodyparser.urlencoded({ extended: false }));
 
- //Routes
+ //Book Routes
 
 // Home Route redirect to book route
 app.get("/", (req, res) => {   
